@@ -4,14 +4,16 @@ var userClickedPattern = [];
 var gameOn = false;
 var level = 0;
 
-// Start Game using keyboard key press
-$(document).keypress(function () {
+// Start Game 
+function startGame() {
     if (!gameOn) {
         $('h1').text('Level ' + level);
         nextSequence();
         gameOn = true;
+        $("#start").remove();
+        $(".container").css("visibility", "visible");
     }
-});
+}
 
 // Choose user colour once button clicked
 $('.btn').click(function () {
@@ -89,8 +91,9 @@ function checkAnswer(currentLevel) {
             $("body").removeClass("game-over");
         }, 200);
 
-        $("h1").text("Game Over, Press Any Key to Restart");
-        
+        $("h1").text("Game Over!");
+        $("h1").append('<br><br><a href="javascript:void(0);" onclick="startGame();" id="start">Play Again</a>');
+        $(".container").css("visibility", "hidden");
         startOver();
     }
 }
